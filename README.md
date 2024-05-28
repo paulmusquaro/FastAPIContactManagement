@@ -49,6 +49,7 @@ The API supports the following operations:
 - **Update a Contact**: `PUT /contacts/{contact_id}`
 - **Delete a Contact**: `DELETE /contacts/{contact_id}`
 - **Contacts with Upcoming Birthdays**: `GET /dates/`
+- **Search Contacts**: `GET /contacts/search?search_query=...`
 
 
 Refer to the Swagger UI documentation for more details on request and response formats.

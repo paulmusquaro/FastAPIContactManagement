@@ -55,3 +55,14 @@ def delete_contact(contact_id: int, db: Session):
         db.delete(contact)
         db.commit()
     return contact
+
+def search_contacts(db: Session, search_query: str):
+
+    stmt = select(Contact).where(
+        (Contact.first_name.ilike(f'%{search_query}%')) |
+        (Contact.last_name.ilike(f'%{search_query}%')) |
+        (Contact.email.ilike(f'%{search_query}%'))
+    )
+
+    result = db.execute(stmt)
+    return result.scalars().all()
