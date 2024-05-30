@@ -57,26 +57,3 @@ def update_contact(body: ContactUpdate, contact_id: int = Path(ge=1), db: Sessio
 def delete_contact(contact_id: int = Path(ge=1), db: Session = Depends(get_db)):
     contact = contacts.delete_contact(contact_id, db)
     return contact
-
-# @router.get()
-# def search_contacts(
-#     first_name: Optional[str] = Query(None),
-#     last_name: Optional[str] = Query(None),
-#     email: Optional[str] = Query(None),
-#     db: Session = Depends(get_db)
-# ):
-#     query = db.query(Contact)
-#     if first_name:
-#         query = query.filter(Contact.first_name.ilike(f"%{first_name}%"))
-#     if last_name:
-#         query = query.filter(Contact.last_name.ilike(f"%{last_name}%"))
-#     if email:
-#         query = query.filter(Contact.email.ilike(f"%{email}%"))
-
-#     contacts = query.all()
-#     if not contacts:
-#         raise HTTPException(status_code=404, detail="No contacts found")
-
-#     return contacts
-
-
