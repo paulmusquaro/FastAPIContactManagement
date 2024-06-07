@@ -6,7 +6,9 @@ This project is a REST API for managing contact information, built using FastAPI
 ## Features
 
 - CRUD operations: Create, Read, Update, Delete contacts.
+- Search contacts by firstname, lastname, or email.
 - Get contacts with birthdays in the next 7 days.
+- Creating an account and logging in.
 - Pydantic models for data validation.
 - Auto-generated API documentation using Swagger UI.
 
