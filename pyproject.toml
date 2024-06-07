@@ -13,6 +13,11 @@ pydantic = {version = "^2.7.1", extras = ["email"]}
 alembic = "^1.13.1"
 fastapi = "^0.111.0"
 uvicorn = "^0.29.0"
+python-jose = {version = "3.3.0", extras = ["cryptography"]}
+libgravatar = "^1.0.4"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-multipart = "^0.0.9"
+mapped = "^20.4.2"
 
 
 [build-system]

@@ -4,18 +4,19 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select, extract, and_, or_
 from sqlalchemy.orm import Session
 from src.database.db import get_db
-from src.database.models import Contact
+from src.database.models import Contact, User
 from src.schemas import ContactResponse
+from src.services.auth import auth_service
 
 router = APIRouter(tags=['dates'])
 
 
 @router.get("/", response_model=List[ContactResponse])
-def show_dates(db: Session = Depends(get_db)):
+def show_dates(db: Session = Depends(get_db), user: User = Depends(auth_service.get_current_user)):
     today = date.today()
     end_date = today + timedelta(days=7)
 
-    stmt = select(Contact).filter(
+    stmt = select(Contact).filter_by(user=user).filter(
         and_(
             or_(
                 and_(

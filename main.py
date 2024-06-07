@@ -3,10 +3,11 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import text, and_, select, extract
 from sqlalchemy.orm import Session
 from src.database.db import get_db
-from src.routes import contacts, dates
+from src.routes import contacts, dates, users
 
 
 app = FastAPI()
+app.include_router(users.router, prefix="/users")
 app.include_router(contacts.router, prefix="/contacts")
 app.include_router(dates.router, prefix="/dates")
 
