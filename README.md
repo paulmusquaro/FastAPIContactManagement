@@ -9,6 +9,9 @@ This project is a REST API for managing contact information, built using FastAPI
 - Search contacts by firstname, lastname, or email.
 - Get contacts with birthdays in the next 7 days.
 - Creating an account and logging in.
+- Update Avatar.
+- Password Reset.
+- Email Confirmation.
 - Pydantic models for data validation.
 - Auto-generated API documentation using Swagger UI.
 
@@ -17,6 +20,7 @@ This project is a REST API for managing contact information, built using FastAPI
 - **FastAPI**: A modern, fast (high-performance), web framework for building APIs with Python 3.7+.
 - **SQLAlchemy**: The Python SQL Toolkit and Object-Relational Mapper.
 - **PostgreSQL**: An open-source relational database.
+- **Redis**: Key-value database for cache.
 - **Pydantic**: Data validation and settings management using Python type annotations.
 
 ## Getting Started
@@ -25,6 +29,7 @@ This project is a REST API for managing contact information, built using FastAPI
 
 - Python 3.12+
 - PostgreSQL
+- Redis
 
 
 ### Running the Application

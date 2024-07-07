@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Password Reset</title>
+</head>
+<body>
+<p>Hi {{username}},</p>
+<p>Please click the following link to recovery your password:</p>
+<p>
+    <a href="{{host}}api/auth/recovery_password/{{token}}">
+        Reset Password
+    </a>
+</p>
+<p>Thanks,</p>
+<p>The Our Team</p>
+</body>
+</html>

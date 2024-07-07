@@ -10,9 +10,10 @@ class UserSchema(BaseModel):
 
 
 class UserResponse(BaseModel):
-    id: int = 1
+    id: int
     username: str
     email: EmailStr
+    created_at: datetime
     avatar: str
 
     class Config:
@@ -52,3 +53,7 @@ class TokenSchema(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
+
+
+class RequestEmail(BaseModel):
+    email: EmailStr

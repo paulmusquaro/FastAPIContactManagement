@@ -1,16 +1,17 @@
 version: '3.8'
 services:
-  witchcraft:
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  postgres:
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=blah_blah_blah
-      - POSTGRES_DB=witchcraft
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-    # - ./database.sql:/docker-entrypoint-initdb.d/database.sql
-    # - ./new_database.sql:/docker-entrypoint-initdb.d/new_database.sql
-    # network_mode: 'host'
