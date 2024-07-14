@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 services:
   redis:
     image: redis:alpine
@@ -15,3 +15,14 @@ services:
       - "5432:5432"
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+  postgres_test:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_DB: ${TEST_POSTGRES_DB}
+      POSTGRES_USER: ${TEST_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${TEST_POSTGRES_PASSWORD}
+    ports:
+      - "5433:5433"
+    volumes:
+      - ./test_pgdata:/var/lib/postgresql/data

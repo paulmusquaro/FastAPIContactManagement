@@ -13,6 +13,13 @@ router = APIRouter(tags=['dates'])
 
 @router.get("/", response_model=List[ContactResponse])
 def show_dates(db: Session = Depends(get_db), user: User = Depends(auth_service.get_current_user)):
+    """
+    The show_dates function retrieves contacts whose birthdays fall within the next 7 days.
+
+    :param db: Session: Provide the database session
+    :param user: User: Get the current user from the authentication service
+    :return: A list of contacts whose birthdays are within the next 7 days
+    """
     today = date.today()
     end_date = today + timedelta(days=7)
 

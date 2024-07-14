@@ -26,6 +26,18 @@ conf = ConnectionConfig(
 
 
 async def send_email(email: EmailStr, username: str, host: str):
+    """
+    The send_email function sends an email to the user with a link to confirm their email address.
+        The function takes in three parameters:
+            -email: EmailStr, the user's email address.
+            -username: str, the username of the user who is registering for an account.  This will be used in a greeting message within the body of the email sent to them.
+            -host: str, this is used as part of a URL that will be included in an HTML template for sending emails.
+
+    :param email: EmailStr: Specify the email address of the recipient
+    :param username: str: Pass the username to the template
+    :param host: str: Pass in the hostname of the server to be used in the email template
+    :return: A coroutine object
+    """
     try:
         token_verification = await auth_service.create_email_token({"sub": email})
         message = MessageSchema(
@@ -41,6 +53,18 @@ async def send_email(email: EmailStr, username: str, host: str):
 
 
 async def send_recovery_email(email: EmailStr, username: str, host: str):
+    """
+    The send_recovery_email function sends an email to the user with a link to reset their password.
+        Args:
+            email (str): The user's email address.
+            username (str): The user's username.
+            host (str): The hostname of the server where this function is being called from.
+
+    :param email: EmailStr: Specify the email address of the user
+    :param username: str: Personalize the email message
+    :param host: str: Pass the host url to the template
+    :return: A coroutine object, which is a special type of object that can be used with asyncio
+    """
     try:
         token_verification = await auth_service.create_email_token({"sub": email})
         message = MessageSchema(
