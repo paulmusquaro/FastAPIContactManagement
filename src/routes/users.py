@@ -83,6 +83,7 @@ async def signup(body: UserSchema, db: Session = Depends(get_db)):
     return new_user
 
 
+
 @router.post("/login",  response_model=TokenSchema)
 async def login(body: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     """

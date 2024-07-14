@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, AsyncMock
 from sqlalchemy.orm import Session
 from src.database.models import User, Contact
 from src.repository.users import get_user_by_email, create_user, update_token, confirmed_email, update_avatar
@@ -8,18 +8,31 @@ from src.schemas import UserSchema
 
 class TestUsers(unittest.IsolatedAsyncioTestCase):
     def setUp(self) -> None:
-        self.user = User(id=1, email="person2025.ua", username="test_user", password="12345", confirmed=True)
-        self.session = MagicMock(spec=Session)
+        # Створюємо мок об'єкт User
+        self.user = User(
+            id=1,
+            username="string",
+            email="com@com.com",
+            password="string",
+            # avatar=None,
+            # refresh_token=None,
+            # confirmed=True,
+            # created_at=None,
+            # updated_at=None
+        )
+        # Створюємо мок об'єкт Session
+        self.session = MagicMock()
+        # Налаштовуємо мок для методу query().filter().first()
+        self.session.query().filter().first.return_value = self.user
 
     async def test_user_by_email(self):
-        email="person2025.ua"
-        self.session.query().filter().first.return_value = self.user
+        email="com@com.com"
         result = await get_user_by_email(email, self.session)
         self.assertEqual(result, self.user)
         self.assertEqual(result.email, self.user.email)
 
     async def test_create_user(self):
-        body = UserModel(username="Paul", email="example.com.ua", password="123456")
+        body = User(username="stringg", email="gcom@com.com", password="string")
         result = await create_user(body, self.session)
         self.session.commit.assert_called_once()
         self.assertIsInstance(result, User)
@@ -33,7 +46,7 @@ class TestUsers(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.user.refresh_token, token)
 
     async def test_confirmed_email(self):
-        email = "person2025.ua"
+        email = "com@com.com"
         with patch('src.repository.users.get_user_by_email') as mock:
             mock.return_value = self.user
             await confirmed_email(email, self.session)
