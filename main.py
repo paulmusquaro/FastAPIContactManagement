@@ -1,4 +1,4 @@
-
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import text, and_, select, extract
 from sqlalchemy.orm import Session
@@ -37,6 +37,14 @@ async def startup():
 
 @app.get("/")
 async def test(db: Session = Depends(get_db)):
+    """
+    The 'test' function is a simple function that checks the health of the database.
+    It does this by making a request to the database and checking if it returns any results.
+    If it doesn't, then we know there's an issue with our connection.
+
+    :param db: Session: Get the database session
+    :return: A dictionary with the message key and a value of welcome to Contacts API!
+    """
     try:
         result = db.execute(text("SELECT 1"))
         result = result.fetchone()
