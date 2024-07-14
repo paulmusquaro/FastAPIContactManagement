@@ -40,7 +40,15 @@ async def create_user(body: UserSchema, db: Session = Depends(get_db)):
     except Exception as err:
         print(err)
 
-    new_user = User(**body.model_dump(), avatar=avatar)
+    # new_user = User(**body.model_dump(), avatar=avatar)
+    # db.add(new_user)
+    # db.commit()
+    # db.refresh(new_user)
+    # return new_user
+
+    new_user_data = body.dict()
+    new_user_data['avatar'] = avatar
+    new_user = User(**new_user_data)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

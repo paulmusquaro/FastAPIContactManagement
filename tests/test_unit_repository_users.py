@@ -14,11 +14,11 @@ class TestUsers(unittest.IsolatedAsyncioTestCase):
             username="string",
             email="com@com.com",
             password="string",
-            # avatar=None,
-            # refresh_token=None,
-            # confirmed=True,
-            # created_at=None,
-            # updated_at=None
+            avatar=None,
+            refresh_token=None,
+            confirmed=True,
+            created_at=None,
+            updated_at=None
         )
         # Створюємо мок об'єкт Session
         self.session = MagicMock()
@@ -27,12 +27,14 @@ class TestUsers(unittest.IsolatedAsyncioTestCase):
 
     async def test_user_by_email(self):
         email="com@com.com"
+        self.session.execute.return_value.scalar_one_or_none.return_value = self.user
         result = await get_user_by_email(email, self.session)
         self.assertEqual(result, self.user)
         self.assertEqual(result.email, self.user.email)
 
+
     async def test_create_user(self):
-        body = User(username="stringg", email="gcom@com.com", password="string")
+        body = UserSchema(username="stringg", email="gcom@com.com", password="string")
         result = await create_user(body, self.session)
         self.session.commit.assert_called_once()
         self.assertIsInstance(result, User)
